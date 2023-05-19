@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ApplicationCore.Domain.Dossier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="index">
+<fieldset>
+<legend> Recherche</legend>
+<input type="text" name="nomAvocat" />
+<input type="submit" value="Serach" />
+</fieldset>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Frais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Avocat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avocat.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Nom)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+            <td>
+                <a asp-action="Details" asp-controller="Avocat" asp-route-id="@item.Avocat.AvocatId">Avocat</a> |              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
